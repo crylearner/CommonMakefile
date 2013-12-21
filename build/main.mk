@@ -5,12 +5,16 @@
 
 include build/systems/system.mk
 
-## 定义产品信息。这里BUILD_SPECS设置为空，表示我们不做额外定制化
+## 定义产品信息。这里BUILD_SPECS设置为spec.mk
 PRODUCT_SPECS :=build/spec.mk
 include build/products/product.mk
 
-CXX:=g++
-CXXFLAGS:=-Wall $(OPTIONS)
+## 定义平台相关的编译命令。这里PLATFORM_SPECS为空，表示我们不做额外定制化。
+PLATFORM_SPECS :=
+include build/platforms/platform.mk
+
+## 将产品信息中的定义的feature与平台定义的编译选项混合
+CXXFLAGS+=$(OPTIONS)
 
 OBJS:=hello.o main.o
 TARGET:=hello.exe
