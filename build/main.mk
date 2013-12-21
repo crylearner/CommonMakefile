@@ -3,7 +3,7 @@
 # Created on: 2013-12-20
 #     Author: lenovo
 
-RM:=rm -f
+include build/systems/system.mk
 
 ## 定义产品信息。这里BUILD_SPECS设置为空，表示我们不做额外定制化
 PRODUCT_SPECS :=build/spec.mk
