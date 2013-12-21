@@ -18,14 +18,14 @@ CXXFLAGS+=$(OPTIONS)
 
 
 SRC_FILES:= hello.cpp main.cpp
-OBJS:=hello.o main.o
+OBJS:=$(SRC_FILES:.cpp=.o)
+DEPS:=$(OBJS:.o=.d)
 TARGET:=hello.exe
 
 ## -MMD 可以用于自动生成头文件依赖关系
 %.o : %.cpp
 	$(CXX) $(CXXFLAGS) -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -MT"$(@:%.o=%.d)" -c "$<" -o "$@" 
 
-DEPS := hello.d main.d
 ifneq "$(MAKECMDGOALS)" "clean"
 -include $(DEPS)
 endif
