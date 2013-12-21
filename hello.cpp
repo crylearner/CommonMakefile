@@ -16,5 +16,6 @@ void sayhello() {
 #else
 	printf("product feature:%s\n", "Talking is disabled");
 #endif
+	printf("product spec:%s\n", ENABLE_SPEC?"Spec is defined":"Spec is not defined");
 }
 

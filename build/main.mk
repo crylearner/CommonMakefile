@@ -5,7 +5,8 @@
 
 RM:=rm -f
 
-## 定义产品信息
+## 定义产品信息。这里BUILD_SPECS设置为空，表示我们不做额外定制化
+PRODUCT_SPECS :=build/spec.mk
 include build/products/product.mk
 
 CXX:=g++
