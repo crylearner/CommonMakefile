@@ -18,7 +18,7 @@ CXXFLAGS+=$(OPTIONS)
 
 ## 只要给定源文件目录以及目标hello.exe
 ## 调用executable.mk，就可以自动编译得到想要的可执行文件
-SRC_FILES:= hello.cpp main.cpp
+SRC_FILES:= hello/hello.cpp main.cpp
 TARGET:=hello.exe
 
 ## 定义了如何生成可执行文件的通用规则

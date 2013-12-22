@@ -6,7 +6,7 @@
 // Description : Hello World in C, Ansi-style
 //============================================================================
 
-#include "hello.h"
+#include "hello/hello.h"
 
 int main(void) {
 	sayhello();
