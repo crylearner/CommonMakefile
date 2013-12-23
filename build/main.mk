@@ -10,4 +10,4 @@ all:
 
 ## 调用哪个模块mk,就编译哪个模块。
 ## 也可以同时将多个模块导入
-include module.mk
+include src/module.mk
