@@ -7,7 +7,7 @@
 include build/targets/object.mk
 	
 ## 定义可执行文件hello.exe的编译规则	
-$(TARGET):	$(OBJS)
+$(TARGET):	$(OBJS) $(ARLIBS)
 	$(AR) $(ARFLAGS) $@ $^
 
 
