@@ -12,10 +12,13 @@ all:	$(TARGET)
 clean: $(TARGET).clean
 
 ## 定义可执行文件hello.exe的编译规则	
-$(TARGET) :	$(OBJS) $(LIBS)
+$(TARGET) :	$(OBJS) $(LDLIBS)
 	$(LD) $(LDFLAGS)  -o $@ $^
 	
 ## 定义 目标clean，一般就是删除所有obj文件，以及可执行文件。
 .PHONY: $(TARGET).clean
 $(TARGET).clean:
 	$(RM) $(TARGET) $(OBJS) $(DEPS)
+
+ALL_TARGETS := $(OBJS) $(TARGET) $(TARGET).clean
+include build/targets/vars-stash.mk

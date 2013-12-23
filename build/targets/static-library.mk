@@ -19,3 +19,6 @@ $(TARGET):	$(OBJS) $(ARLIBS)
 .PHONY: $(TARGET).clean
 $(TARGET).clean:
 	$(RM) $(TARGET) $(OBJS) $(DEPS)
+
+ALL_TARGETS := $(OBJS) $(TARGET) $(TARGET).clean
+include build/targets/vars-stash.mk
