@@ -3,6 +3,9 @@
 # Created on: 2013-12-21
 #     Author: lenovo
 
+MODULE_PATH			:= $(call current_path)
+MODULE_NAME			:= main
+
 include build/systems/system.mk
 
 ## 定义产品信息。这里BUILD_SPECS设置为spec.mk
@@ -18,7 +21,7 @@ CXXFLAGS+=$(OPTIONS)
 
 ## 只要给定源文件目录以及目标hello.exe
 ## 调用executable.mk，就可以自动编译得到想要的可执行文件
-SRC_FILES:= src/main.cpp
+SRC_FILES:= $(MODULE_PATH)/main.cpp
 LDLIBS += src/hello/hello.a
 TARGET:=hello.exe
 
