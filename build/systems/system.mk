@@ -4,3 +4,4 @@
 #     Author: lenovo
 
 RM:=rm -f
+MAKEDIR:= mkdir -p

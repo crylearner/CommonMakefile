@@ -19,6 +19,8 @@ include build/platforms/platform.mk
 ## 将产品信息中的定义的feature与平台定义的编译选项混合
 CXXFLAGS+=$(OPTIONS)
 
+include build/paths/path.mk
+
 ## 只要给定源文件目录以及目标hello.exe
 ## 调用executable.mk，就可以自动编译得到想要的可执行文件
 SRC_FILES:= $(MODULE_PATH)/hello.cpp
