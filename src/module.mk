@@ -25,7 +25,8 @@ include build/paths/path.mk
 ## 调用executable.mk，就可以自动编译得到想要的可执行文件
 SRC_FILES:= $(MODULE_PATH)/main.cpp
 LDLIBS += src/hello/hello.a
-TARGET:=hello.exe
+#TARGET:=hello.exe
+TARGET:= #//TODO 
 
 ## 定义了如何生成可执行文件的通用规则
 include build/targets/executable.mk
