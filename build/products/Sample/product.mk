@@ -3,6 +3,7 @@
 # Created on: 2013-12-20
 #     Author: lenovo
 
+
 ## vendor，version等产品信息定义在vendor.mk
 include $(PRODUCTS_PATH)/vendor.mk
 
