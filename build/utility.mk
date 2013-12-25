@@ -1,5 +1,5 @@
 
-include build/assert.mk
+include $(BUILD_SYSTEM_PATH)/assert.mk
 
 ## get the path of current module
 #  @return current module path

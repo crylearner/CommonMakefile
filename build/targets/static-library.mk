@@ -4,7 +4,7 @@
 #     Author: lenovo
 
 ## 编译生成obj文件的通用规则
-include build/targets/object.mk
+include $(TARGETS_PATH)/object.mk
 
 ## 如果目标未定义，则默认是out/lib/<module-name>.a
 ifeq "$(TARGET)" ""
@@ -27,4 +27,4 @@ $(TARGET).clean:
 	$(RM) $(TARGET) $(OBJS) $(DEPS)
 
 ALL_TARGETS := $(OBJS) $(TARGET) $(TARGET).clean
-include build/targets/vars-stash.mk
+include $(TARGETS_PATH)/vars-stash.mk
