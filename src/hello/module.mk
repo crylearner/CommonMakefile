@@ -27,4 +27,4 @@ SRC_FILES:= $(MODULE_PATH)/hello.cpp
 TARGET:= $(MODULE_PATH)/hello.a
 
 ## 定义了如何生成静态库的通用规则
-include $(TARGETS_PATH)/static-library.mk
+include $(BUILD_STATIC_LIBRARY)

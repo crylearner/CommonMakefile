@@ -29,4 +29,4 @@ LDLIBS += src/hello/hello.a
 TARGET:= #//TODO 
 
 ## 定义了如何生成可执行文件的通用规则
-include $(TARGETS_PATH)/executable.mk
+include $(BUILD_EXECUTABLE)
