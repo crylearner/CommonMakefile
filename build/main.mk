@@ -5,7 +5,7 @@
 
 ## 约定俗成，大家已经习惯性的总是将all默认的make终极目标。
 ## 在这个例子中，就是生成hello.exe 
-.PHONY : all clean
+.PHONY : all clean distclean
 all:
 
 include $(BUILD_SYSTEM_PATH)/config.mk

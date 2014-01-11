@@ -14,7 +14,8 @@ endif
 ## 利用多规则定义，将clean目标转发给$(TARGET).clean,从而避免出现clean目标重定义的问题
 ## 对all，不需要额外处理，因为$(TARGET)本身就要求不同模块目标不同
 all:	$(TARGET)
-clean: $(TARGET).clean
+clean:  $(TARGET).clean
+distclean: $(TARGET).distclean
 	
 ## 定义可执行文件hello.exe的编译规则	
 $(TARGET):	$(OBJS) $(ARLIBS)
@@ -26,5 +27,9 @@ $(TARGET):	$(OBJS) $(ARLIBS)
 $(TARGET).clean:
 	$(RM) $(TARGET) $(OBJS) $(DEPS)
 
-ALL_TARGETS := $(OBJS) $(TARGET) $(TARGET).clean
+.PHONY: $(TARGET).distclean
+$(TARGET).distclean:
+	$(RMDIR) $(TARGET) $(INTERMEDIATE_LIB_PATH) $(INTERMEDIATE_OBJ_PATH)
+
+ALL_TARGETS := $(OBJS) $(TARGET) $(TARGET).clean $(TARGET).distclean
 include $(TARGETS_PATH)/vars-stash.mk

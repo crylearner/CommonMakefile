@@ -18,6 +18,6 @@ $(INTERMEDIATE_OBJ_PATH)/%.o : %.c
 	$(hide)$(MAKEDIR) $(dir $@)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -MT"$(@:%.o=%.d)" -c "$<" -o "$@" 
 
-ifneq "$(MAKECMDGOALS)" "clean"
--include $(DEPS)
+ifeq ($(filter $(MAKECMDGOALS), clean distclean),)
+  -include $(DEPS)
 endif
