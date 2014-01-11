@@ -21,7 +21,7 @@ CXXFLAGS+=$(OPTIONS)
 ifeq "$(TARGET_BUILD_TYPE)"  "debug"
   CPPFLAGS +=-DDEBUG -D__DEBUG__
 endif  
-include $(PATHS_PATH)/path.mk
+include $(PATH_SPECS)
 
 ## 只要给定源文件目录以及目标hello.exe
 ## 调用executable.mk，就可以自动编译得到想要的可执行文件
