@@ -18,6 +18,9 @@ include $(PLATFORMS_PATH)/platform.mk
 
 ## 将产品信息中的定义的feature与平台定义的编译选项混合
 CXXFLAGS+=$(OPTIONS)
+ifeq "$(TARGET_BUILD_TYPE)"  "debug"
+  CPPFLAGS +=-DDEBUG -D__DEBUG__
+endif  
 
 include $(PATHS_PATH)/path.mk
 
@@ -25,7 +28,6 @@ include $(PATHS_PATH)/path.mk
 ## 调用executable.mk，就可以自动编译得到想要的可执行文件
 SRC_FILES:= $(MODULE_PATH)/main.cpp
 LDLIBS += src/hello/hello.a
-#TARGET:=hello.exe
 TARGET:= #//TODO 
 
 ## 定义了如何生成可执行文件的通用规则

@@ -6,6 +6,9 @@
 DEFAULT_PLATFORM 		:= $(strip x86-linux)
 DEFAULT_PRODUCT  		:= $(strip Sample)
 DEFAULT_BUILD_TYPE		:= debug
+ifeq "$(TARGET_BUILD_TYPE)" ""
+TARGET_BUILD_TYPE=debug
+endif
 
 PRODUCTS_PATH			:=$(BUILD_SYSTEM_PATH)/products
 PLATFORMS_PATH			:=$(BUILD_SYSTEM_PATH)/platforms

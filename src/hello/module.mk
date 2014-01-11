@@ -17,8 +17,10 @@ PLATFORM_SPECS :=
 include $(PLATFORMS_PATH)/platform.mk
 
 ## 将产品信息中的定义的feature与平台定义的编译选项混合
-CXXFLAGS+=$(OPTIONS)
-
+CXXFLAGS+=$(OPTIONS) 
+ifeq "$(TARGET_BUILD_TYPE)"  "debug"
+  CPPFLAGS +=-DDEBUG -D__DEBUG__
+endif  
 include $(PATHS_PATH)/path.mk
 
 ## 只要给定源文件目录以及目标hello.exe
