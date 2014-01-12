@@ -42,7 +42,7 @@ $(if $(strip $2),\
 	$(eval TARGET :=$(strip $2)), \
 	$(if $(call equals, $1, $(BUILD_EXECUTABLE)), $(eval TARGET := $(INTERMEDIATE_BIN_PATH)/$(MODULE_NAME))) \
 	$(if $(call equals, $1, $(BUILD_STATIC_LIBRARY)), $(eval TARGET := $(INTERMEDIATE_LIB_PATH)/$(MODULE_NAME).a)) \
-	$(if $(call equals, $1, $(BUILD_SHARED_LIBRARY)), $(eval TARGET := $(INTERMEDIATE_LIB_PATH)/$(MODULE_NAME).so)) \
+	$(if $(call equals, $1, $(BUILD_SHARED_LIBRARY)), $(eval TARGET := $(INTERMEDIATE_LIB_PATH)/lib$(MODULE_NAME).so)) \
 	) \
 $(eval include $1)
 endef
