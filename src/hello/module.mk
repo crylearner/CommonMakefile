@@ -6,10 +6,13 @@
 MODULE_PATH			:= $(call current_path)
 MODULE_NAME			:= hello
 
-## 定义产品信息。这里BUILD_SPECS设置为spec.mk
-PRODUCT_SPECS :=src/hello/spec.mk
-## 定义平台相关的编译命令。这里PLATFORM_SPECS为空，表示我们不做额外定制化。
+## 定义product定制文件
+PRODUCT_SPECS := $(MODULE_PATH)/spec.mk
+## 定义platform定制文件
 PLATFORM_SPECS :=
+## 定义target定制文件
+TARGET_SPECS :=
+
 include $(BUILD_CONFIGURE)
 
 ## 只要给定源文件目录以及目标hello.exe

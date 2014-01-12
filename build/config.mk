@@ -44,7 +44,8 @@ $(if $(strip $2),\
 	$(if $(call equals, $1, $(BUILD_STATIC_LIBRARY)), $(eval TARGET := $(INTERMEDIATE_LIB_PATH)/$(MODULE_NAME).a)) \
 	$(if $(call equals, $1, $(BUILD_SHARED_LIBRARY)), $(eval TARGET := $(INTERMEDIATE_LIB_PATH)/lib$(MODULE_NAME).so)) \
 	) \
-$(eval include $1)
+$(eval include $1 \
+               $(TARGETS_PATH)/target-specs.mk)
 endef
 
 
