@@ -30,5 +30,6 @@ include $(BUILD_SYSTEM_PATH)/utility.mk
 ifneq "$(SHOT_MODULE)" ""
 include $(SHOT_MODULE)
 else
-include src/hello/module.mk src/module.mk 
+#include src/hello/module.mk src/module.mk
+include test/module.mk
 endif
