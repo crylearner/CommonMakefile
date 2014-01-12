@@ -14,7 +14,7 @@ endef
 # assert_not_null
 # @param $(1) var
 define assert_not_null
-$(call assert,$1,$1 is null)
+$(call assert,$1,$(if $(strip $2),$2,the variable is null))
 endef
 
 # equals
@@ -29,6 +29,27 @@ endef
 define assert_equal
 $(call assert, $(call equals $1, $2), $(1) does not equals to $(2)))
 endef
+
+# expect
+# @param $(1) condition
+# @param $(2) fail message
+define expect
+$(if $(strip $(1)),$(eval ),$(error expect failed: $(strip $(2))))
+endef
+
+# expect_not_null
+# @param $(1) var
+define expect_not_null
+$(call expect,$1,$(if $(strip $2),$2,the variable is null))
+endef
+
+# equal assert
+# @param $(1) first condition
+# @param $(2) second condition
+define expect_equal
+$(call expect, $(call equals $1, $2), $(1) does not equals to $(2)))
+endef
+
 
 define trace.i
 $(if $(ENABLE_TRACE),$(info $1),)
