@@ -3,6 +3,9 @@
 # Created on: 2013-11-14
 #     Author: lenovo
 
+############################################################################
+############################################################################
+
 ## define how to import system info
 define import_system
 $(eval include $(SYSTEMS_PATH)/system.mk)
@@ -13,20 +16,16 @@ endef
 ## 各种特性开关定义在features.mk
 ## 加载额外定制的产品配置,product-specs.mk,实际是依次加载变量PRODUCT_SPECS指定的文件列表
 define import_product
-$(eval include $(if $(TARGET_PRODUCT), $(PRODUCTS_PATH)/$(TARGET_PRODUCT)/vendor.mk \
-                                       $(PRODUCTS_PATH)/$(TARGET_PRODUCT)/features.mk \
-                                       $(PRODUCTS_PATH)/$(TARGET_PRODUCT)/product-specs.mk, \
-                                       $(PRODUCTS_PATH)/$(DEFAULT_PRODUCT)/vendor.mk \
-                                       $(PRODUCTS_PATH)/$(DEFAULT_PRODUCT)/features.mk \
-                                       $(PRODUCTS_PATH)/$(DEFAULT_PRODUCT)/product-specs.mk))
+$(eval include $(PRODUCTS_PATH)/$(TARGET_PRODUCT)/vendor.mk \
+               $(PRODUCTS_PATH)/$(TARGET_PRODUCT)/features.mk \
+               $(PRODUCTS_PATH)/$(TARGET_PRODUCT)/product-specs.mk)
 endef
 
 ## define how to import platform
-# 如果TARGET_PLATFORM不存在，则加载$(DEFAULT_PLATFORM).mk
 # platform-specs.mk用于加载额外定制的编译命令。实际是依次加载变量PLATFORM_SPECS指定的文件列表
 define import_platform
-$(eval include $(if $(TARGET_PLATFORM), $(PLATFORMS_PATH)/$(TARGET_PLATFORM).mk, $(PLATFORMS_PATH)/$(DEFAULT_PLATFORM).mk)) \
-$(eval include $(PLATFORMS_PATH)/platform-specs.mk)
+$(eval include $(PLATFORMS_PATH)/$(TARGET_PLATFORM).mk \
+               $(PLATFORMS_PATH)/platform-specs.mk)
 endef
 
 
@@ -49,25 +48,31 @@ $(eval include $1)
 endef
 
 
+
+
 ##############################################################################################
 ##############################################################################################
 
-DEFAULT_PLATFORM 		:= x86-linux
+## 配置默认编译产品，默认编译平台，默认debug版本
 DEFAULT_PRODUCT  		:= Sample
+DEFAULT_PLATFORM 		:= x86-linux
 DEFAULT_BUILD_TYPE		:= debug
-ifeq "$(TARGET_BUILD_TYPE)" ""
-TARGET_BUILD_TYPE=debug
-endif
+TARGET_PRODUCT		:=$(if $(TARGET_PRODUCT),$(TARGET_PRODUCT),$(DEFAULT_PRODUCT))
+TARGET_PLATFORM		:=$(if $(TARGET_PLATFORM),$(TARGET_PLATFORM),$(DEFAULT_PLATFORM))
+TARGET_BUILD_TYPE	:=$(if $(TARGET_BUILD_TYPE),$(TARGET_BUILD_TYPE),$(DEFAULT_BUILD_TYPE))
 
-
+## 导入需要的产品信息、编译平台信息
 $(call import_system)
 $(call import_product)
 $(call import_platform)
 
 ## 将产品信息中的定义的feature与平台定义的编译选项混合
 CPPFLAGS+=$(OPTIONS)
-ifeq "$(TARGET_BUILD_TYPE)"  "debug"
-  CPPFLAGS +=-DDEBUG -D__DEBUG__
-endif  
+## 如果是debug版本，打开debug宏
+ifeq "$(BUILD_TYPE)"  "debug"
+CPPFLAGS +=-DDEBUG -D__DEBUG__
+endif
 
+## 导入中间文件路径配置
+#ENABLE_PLATFORM_SUFFIX
 include $(PATH_SPECS)
