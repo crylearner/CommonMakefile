@@ -10,11 +10,11 @@ include $(SYSTEMS_PATH)/system.mk
 
 ## 定义产品信息。这里BUILD_SPECS设置为spec.mk
 PRODUCT_SPECS :=
-include $(PRODUCTS_PATH)/product.mk
+$(call import_product)
 
 ## 定义平台相关的编译命令。这里PLATFORM_SPECS为空，表示我们不做额外定制化。
 PLATFORM_SPECS :=
-include $(PLATFORMS_PATH)/platform.mk
+$(call import_platform)
 
 ## 将产品信息中的定义的feature与平台定义的编译选项混合
 CXXFLAGS+=$(OPTIONS)
@@ -28,7 +28,6 @@ include $(PATH_SPECS)
 ## 调用executable.mk，就可以自动编译得到想要的可执行文件
 SRC_FILES:= $(MODULE_PATH)/main.cpp
 LDLIBS += src/hello/hello.a
-TARGET:= #//TODO 
 
 ## 定义了如何生成可执行文件的通用规则
-include $(BUILD_EXECUTABLE)
+$(call build_target,$(BUILD_EXECUTABLE))
