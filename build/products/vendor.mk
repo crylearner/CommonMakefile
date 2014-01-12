@@ -4,5 +4,5 @@
 #     Author: lenovo
 
 ## 定义产品信息
-PRODUCT_VENDOR:=Sample
+PRODUCT_VENDOR:=Root-Product
 PRODUCT_VERSION:=1.0
