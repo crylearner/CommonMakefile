@@ -3,23 +3,10 @@
 # Created on: 2013-11-14
 #     Author: lenovo
 
-DEFAULT_PLATFORM 		:= x86-linux
-DEFAULT_PRODUCT  		:= Sample
-DEFAULT_BUILD_TYPE		:= debug
-ifeq "$(TARGET_BUILD_TYPE)" ""
-TARGET_BUILD_TYPE=debug
-endif
-
-PRODUCTS_PATH			:=$(BUILD_SYSTEM_PATH)/products
-PLATFORMS_PATH			:=$(BUILD_SYSTEM_PATH)/platforms
-SYSTEMS_PATH			:=$(BUILD_SYSTEM_PATH)/systems
-TARGETS_PATH			:=$(BUILD_SYSTEM_PATH)/targets
-PATH_SPECS				:=$(BUILD_SYSTEM_PATH)/path.mk
-
-BUILD_EXECUTABLE 		:=$(TARGETS_PATH)/executable.mk
-BUILD_STATIC_LIBRARY 	:=$(TARGETS_PATH)/static-library.mk
-BUILD_SHARED_LIBRARY	:=$(TARGETS_PATH)/shared-library.mk
-
+## define how to import system info
+define import_system
+$(eval include $(SYSTEMS_PATH)/system.mk)
+endef
 
 ## define how to import product
 ## vendor，version等产品信息定义在vendor.mk
@@ -48,7 +35,6 @@ endef
 # $1 指定编译可执行文件，或者lib，或者so
 # $2 指定生成的目标文件名称，如果没有指定，则会设定默认名字。
 define build_target
-$(info $1  $2) \
 $(call assert_not_null, $(INTERMEDIATE_OBJ_PATH), INTERMEDIATE_OBJ_PATH is not set) \
 $(call assert_not_null, $(INTERMEDIATE_LIB_PATH), INTERMEDIATE_LIB_PATH is not set) \
 $(call assert_not_null, $(INTERMEDIATE_BIN_PATH), INTERMEDIATE_BIN_PATH is not set) \
@@ -61,3 +47,27 @@ $(if $(strip $2),\
 	) \
 $(eval include $1)
 endef
+
+
+##############################################################################################
+##############################################################################################
+
+DEFAULT_PLATFORM 		:= x86-linux
+DEFAULT_PRODUCT  		:= Sample
+DEFAULT_BUILD_TYPE		:= debug
+ifeq "$(TARGET_BUILD_TYPE)" ""
+TARGET_BUILD_TYPE=debug
+endif
+
+
+$(call import_system)
+$(call import_product)
+$(call import_platform)
+
+## 将产品信息中的定义的feature与平台定义的编译选项混合
+CPPFLAGS+=$(OPTIONS)
+ifeq "$(TARGET_BUILD_TYPE)"  "debug"
+  CPPFLAGS +=-DDEBUG -D__DEBUG__
+endif  
+
+include $(PATH_SPECS)
