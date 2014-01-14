@@ -31,5 +31,5 @@ ifneq "$(SHOT_MODULE)" ""
 include $(SHOT_MODULE)
 else
 #include src/hello/module.mk src/module.mk
-include test/module.mk src/hello/module.mk src/module.mk
+include test/module.mk src/hello/module.mk src/module.mk src/module-test.mk src/hello/module-test.mk
 endif
