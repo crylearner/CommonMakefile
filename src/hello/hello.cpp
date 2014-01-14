@@ -16,7 +16,13 @@ void sayhello() {
 #else
 	printf("product feature:%s\n", "Talking is disabled");
 #endif
-	printf("product spec:%s\n", ENABLE_SPEC?"Spec is defined":"Spec is not defined");
+
+#if defined(ENABLE_SPEC) && ENABLE_SPEC==true
+	printf("product spec:%s\n", "Spec is defined");
+#else
+	printf("product spec:%s\n", "Spec is not defined");
+#endif
+
 #if defined(DEBUG) || defined(__DEBUG__)
 	printf("dubug version\n");
 #else
@@ -24,3 +30,12 @@ void sayhello() {
 #endif
 }
 
+std::string product_vendor()
+{
+	return PRODUCT_VENDOR;
+}
+
+std::string product_version()
+{
+	return PRODUCT_VERSION;
+}
