@@ -3,6 +3,7 @@
 function usage()
 {
 cat<<USAGE
+genmk <name> 在当前目录下生成一个模块mk：<name>.mk， 如果name省略，默认为module.mk
 mm <dir> 编译当前路径或者父路径的module.mk
 mmm <module.mk>  编译指定的module.mk, 可以同时指定多个。
 choosecombo  --buildtype=<debug/release>  --product=<name> --platform=<name>
@@ -66,12 +67,27 @@ function findmakefile()
 }
 
 ##
+#
+function genmk()
+{
+	T=$(gettop)
+	local name=module.mk
+	test "$1" != "" && name=$1
+	if [ -f $name ];then
+		echo "$name is existed.DO YOU wander to OVERWRITE it?"
+		return 1
+	else
+		cp $T/build/templates/module.mk $name
+	fi
+}
+
+##
 # 模块化编译命令，可以指定一个或者多个模块makefile。路径使用相对于当前路径的相对路径
 # 
 # example: mm module.mk  hello/module.mk
 function mm()
 {
-	# Find the closest Android.mk file.
+	# Find the closest main.mk file.
 	T=$(gettop)
 	local M=$(findmakefile)
 	# Remove the path to top as the makefilepath needs to be relative
@@ -187,5 +203,7 @@ function __HUB_completion() {
 	*) eval __${words[0]}_completion ;;
 	esac
 }
+
+
 
 complete -F __HUB_completion choosecombo
