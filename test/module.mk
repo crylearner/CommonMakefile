@@ -17,7 +17,9 @@ TARGET_SPECS 		:= #TODO
 include $(BUILD_CONFIGURE)
 
 ## 定义源文件列表
-SRC_FILES:= $(MODULE_PATH)/gtest_main.cpp
+SRC_FILES:= $(MODULE_PATH)/gtest_main.cpp \
+			$(MODULE_PATH)/HelloTest.cpp \
+			src/hello/hello.cpp
 LDLIBS += $(MODULE_PATH)/lib/libgtest.a
 
 ## 调用目标编译规则

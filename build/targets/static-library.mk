@@ -11,7 +11,8 @@ include $(TARGETS_PATH)/object.mk
 all:	$(TARGET)
 clean:  $(TARGET).clean
 distclean: $(TARGET).distclean
-	
+
+
 ## 定义可执行文件hello.exe的编译规则	
 $(TARGET):	$(OBJS) $(ARLIBS)
 	$(hide)$(MAKEDIR) $(dir $@)
