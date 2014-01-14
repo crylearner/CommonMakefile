@@ -17,8 +17,7 @@ TARGET_SPECS 		:= #TODO
 include $(BUILD_CONFIGURE)
 
 ## 定义源文件列表
-SRC_FILES:= $(MODULE_PATH)/gtest_main.cpp
-LDLIBS += $(MODULE_PATH)/lib/libgtest.a
+SRC_FILES:= $(MODULE_PATH)/gtest-all.cpp
 
 ## 调用目标编译规则
-$(call build_target,$(BUILD_EXECUTABLE),$(MODULE_PATH)/gtest.exe)
+$(call build_target,$(BUILD_STATIC_LIBRARY),$(MODULE_PATH)/lib/libgtest.a)
